@@ -3,13 +3,14 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
-  authDomain: 'crwn-db.firebaseapp.com',
-  databaseURL: 'https://crwn-db.firebaseio.com',
-  projectId: 'crwn-db',
-  storageBucket: 'crwn-db.appspot.com',
-  messagingSenderId: '850995411664',
-  appId: '1:850995411664:web:7ddc01d597846f65'
+  apiKey: "AIzaSyC8AVAUzQZd2IoyY1bj7bjSgp_4vph9Il0",
+  authDomain: "crwn-clothing-db-b1fc9.firebaseapp.com",
+  databaseURL: "https://crwn-clothing-db-b1fc9.firebaseio.com",
+  projectId: "crwn-clothing-db-b1fc9",
+  storageBucket: "crwn-clothing-db-b1fc9.appspot.com",
+  messagingSenderId: "758980411936",
+  appId: "1:758980411936:web:437805e26329437f7c7245",
+  measurementId: "G-CQX0VP7Q6Y"
 };
 
 firebase.initializeApp(config);
@@ -22,7 +23,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const { displayName, email } = userAuth;
+    const {
+      displayName,
+      email
+    } = userAuth;
     const createdAt = new Date();
     try {
       await userRef.set({
@@ -56,7 +60,10 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = collections => {
   const transformedCollection = collections.docs.map(doc => {
-    const { title, items } = doc.data();
+    const {
+      title,
+      items
+    } = doc.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
@@ -85,7 +92,9 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
-googleProvider.setCustomParameters({ prompt: 'select_account' });
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;
